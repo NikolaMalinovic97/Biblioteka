@@ -1,5 +1,7 @@
 package biblioteka;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
@@ -16,6 +18,31 @@ public class BibliotekaTest {
 		Scanner input = new Scanner(System.in);
 		int opcija;
 		
+		//Deklaracija i kreiranje fajlova
+		File fRacun = new File("Racuni.txt");
+		File fKnjiga = new File("Knjige.txt");
+		File fZapisnik = new File("Zapisnik.txt");
+		if(! fRacun.exists()) {
+			try {
+				fRacun.createNewFile();
+			} catch (IOException e) {
+				System.out.println("Fajl se ne moze kreirati!");
+			}
+		}
+		if(! fKnjiga.exists()) {
+			try {
+				fKnjiga.createNewFile();
+			} catch (IOException e) {
+				System.out.println("Fajl se ne moze kreirati!");
+			}
+		}
+		if(! fZapisnik.exists()) {
+			try {
+				fZapisnik.createNewFile();
+			} catch (IOException e) {
+				System.out.println("Fajl se ne moze kreirati!");
+			}
+		}
 		
 		//Dio programa koji se prikazuje u konzoli
 		do {
