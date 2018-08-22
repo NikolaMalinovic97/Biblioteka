@@ -1,6 +1,8 @@
 package biblioteka;
 
-public class Racun {
+import java.io.Serializable;
+
+public class Racun implements Serializable{
 
 	int brojRacuna;
 	String imeMusterije;
