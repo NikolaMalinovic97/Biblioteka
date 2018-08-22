@@ -8,6 +8,7 @@ public class BibliotekaTest {
 
 	public static void main(String[] args) {
 
+		//Deklaracija pormjenljivih
 		ArrayList<Racun> listaRacuna = new ArrayList<>();
 		ArrayList<Knjiga> listaKnjiga = new ArrayList<>();
 		ArrayList<Zapisnik> listaZapisnika = new ArrayList<>();
@@ -15,6 +16,8 @@ public class BibliotekaTest {
 		Scanner input = new Scanner(System.in);
 		int opcija;
 		
+		
+		//Dio programa koji se prikazuje u konzoli
 		do {
 			System.out.print("\n----------------------MENI----------------------"
 					+ "\n1. Kreiranje racuna."
@@ -50,7 +53,14 @@ public class BibliotekaTest {
 			case 3: System.out.println("Unesite broj racuna :");
 					do {
 						regularnost = true;
-						brRacuna = input.nextInt();
+						while(true) {
+							try {
+								brRacuna = input.nextInt();
+								break;
+							} catch (Exception e) {
+								System.out.println("Pogresan unos pokusajte ponovo!");
+							}
+						}
 						for (int i = 0; i < listaRacuna.size(); i++) {
 							if(brRacuna == listaRacuna.get(i).brojRacuna) {
 								indexRacuna = i;
@@ -68,7 +78,16 @@ public class BibliotekaTest {
 					
 					do {
 						regularnost = true;
-						brKnjige = input.nextInt();
+						System.out.println("Unesite broj knjige:");
+						while(true) {
+							try {
+								brKnjige = input.nextInt();
+								break;
+							} catch (Exception e) {
+								System.out.println("Pogresan unos pokusajte ponovo!");
+								input.nextLine();
+							}
+						}
 						for (int i = 0; i < listaKnjiga.size(); i++) {
 							if(brKnjige == listaKnjiga.get(i).brojKnjige) {
 								indexKnjige = i;
@@ -93,6 +112,7 @@ public class BibliotekaTest {
 			}
 		}while(opcija != 0);
 		
+		input.close();
 	}
 
 	//-------------------------------------METODE-------------------------------------------
@@ -110,7 +130,15 @@ public class BibliotekaTest {
 		// unos broja racuna
 		do {
 			regularan = false;
-			brojRacuna = input.nextInt();
+			while(true) {
+				try {
+					brojRacuna = input.nextInt();
+					break;
+				} catch (Exception e) {
+					System.out.println("Pogresan unos pokusajte ponovo!");
+					input.nextLine();
+				}
+			}
 			if(brojRacuna < 0) {
 				System.out.println("Greska! Broj racuna mora biti pozitivan broj, pokusajte ponovo.");
 				regularan = true;
@@ -126,7 +154,14 @@ public class BibliotekaTest {
 		
 		//unos imena musterije
 		System.out.print("Unesite ime musterije: ");
-		ime = input.next();
+		while(true) {
+			try {
+				ime = input.next();
+				break;
+			} catch (Exception e) {
+				System.out.println("Pogresan unos pokusajte ponovo!");
+			}
+		}
 		
 		novaLista.add(new Racun(brojRacuna, ime, 0));
 		return novaLista;
@@ -146,7 +181,15 @@ public class BibliotekaTest {
 		System.out.print("Unesite broj knjige: ");
 		do {
 			regularan = false;
-			brojKnjige = input.nextInt();
+			while(true) {
+				try {
+					brojKnjige = input.nextInt();
+					break;
+				} catch (Exception e) {
+					System.out.println("Pogresan unos pokusajte ponovo!");
+					input.nextLine();
+				}
+			}
 			if(brojKnjige < 0) {
 				System.out.println("Greska! Broj knjige mora biti pozitivan broj, pokusajte ponovo.");
 				regularan = true;
@@ -162,7 +205,14 @@ public class BibliotekaTest {
 		
 		// unos imena knjige
 		System.out.print("Unesite ime knjige :");
-		imeKnjige = input.next();
+		while(true) {
+			try {
+				imeKnjige = input.next();
+				break;
+			} catch (Exception e) {
+				System.out.println("Pogresan unos pokusajte ponovo!");
+			}
+		}
 		
 		novaLista.add(new Knjiga(brojKnjige, imeKnjige, true));
 		return novaLista;
