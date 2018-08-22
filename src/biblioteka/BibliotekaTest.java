@@ -1,5 +1,12 @@
 package biblioteka;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
@@ -16,6 +23,72 @@ public class BibliotekaTest {
 		Scanner input = new Scanner(System.in);
 		int opcija;
 		
+		//Deklaracija i kreiranje fajlova
+		File fRacun = new File("Racuni.txt");
+		File fKnjiga = new File("Knjige.txt");
+		File fZapisnik = new File("Zapisnik.txt");
+		if(! fRacun.exists()) {
+			try {
+				fRacun.createNewFile();
+			} catch (IOException e) {
+				System.out.println("Fajl se ne moze kreirati!");
+			}
+		}
+		if(! fKnjiga.exists()) {
+			try {
+				fKnjiga.createNewFile();
+			} catch (IOException e) {
+				System.out.println("Fajl se ne moze kreirati!");
+			}
+		}
+		if(! fZapisnik.exists()) {
+			try {
+				fZapisnik.createNewFile();
+			} catch (IOException e) {
+				System.out.println("Fajl se ne moze kreirati!");
+			}
+		}
+		
+		//Unos podata iz fajla u listu
+		ObjectInputStream oisRacun = null;
+		ObjectInputStream oisKnjiga = null;
+		ObjectInputStream oisZapisnik = null;
+		try {
+			oisRacun = new ObjectInputStream(new FileInputStream(fRacun));
+			Racun r = null;
+			while ((r = (Racun) oisRacun.readObject()) != null){
+				listaRacuna.add(r);
+			}
+		} catch (IOException e1) {
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			oisKnjiga = new ObjectInputStream(new FileInputStream(fKnjiga));
+			Knjiga k = null;
+			while ((k = (Knjiga) oisKnjiga.readObject()) != null){
+				listaKnjiga.add(k);
+			}
+		} catch (IOException e1) {
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			oisZapisnik = new ObjectInputStream(new FileInputStream(fZapisnik));
+			Zapisnik z = null;
+			while ((z = (Zapisnik) oisZapisnik.readObject()) != null){
+				listaZapisnika.add(z);
+			}
+		} catch (IOException e1) {
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		
 		//Dio programa koji se prikazuje u konzoli
 		do {
@@ -113,6 +186,29 @@ public class BibliotekaTest {
 		}while(opcija != 0);
 		
 		input.close();
+		
+		//Upisivanje podataka (objekata) u fajl
+		ObjectOutputStream ousRacun = null;
+		ObjectOutputStream ousKnjiga = null;
+		ObjectOutputStream ousZapisnik = null;
+		try {
+			ousRacun = new ObjectOutputStream(new FileOutputStream(fRacun));
+			for (int i = 0; i < listaRacuna.size(); i++) {
+				ousRacun.writeObject(listaRacuna.get(i));
+			}
+			ousKnjiga = new ObjectOutputStream(new FileOutputStream(fKnjiga));
+			for (int i = 0; i < listaKnjiga.size(); i++) {
+				ousKnjiga.writeObject(listaKnjiga.get(i));
+			}
+			ousZapisnik = new ObjectOutputStream(new FileOutputStream(fZapisnik));
+			for (int i = 0; i < listaZapisnika.size(); i++) {
+				ousZapisnik.writeObject(listaZapisnika.get(i));
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("Fajl ne postoji!");
+		} catch (IOException e) {
+			System.out.println("Podaci se ne mogu upisati u fajl!");
+		}
 	}
 
 	//-------------------------------------METODE-------------------------------------------

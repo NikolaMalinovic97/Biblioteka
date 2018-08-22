@@ -1,8 +1,9 @@
 package biblioteka;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Zapisnik {
+public class Zapisnik implements Serializable{
 
 	int brojRacuna;
 	int brojKnjige;
