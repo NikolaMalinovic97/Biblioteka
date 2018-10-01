@@ -221,6 +221,7 @@ public class BibliotekaTest {
 		boolean regularan;
 		int brojRacuna;
 		String ime;
+		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 		
 		// unos broja racuna
@@ -271,6 +272,7 @@ public class BibliotekaTest {
 		int brojKnjige;
 		String imeKnjige;
 		boolean regularan;
+		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 		
 		// unos broja knjige

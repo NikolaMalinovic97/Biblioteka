@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class Knjiga implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	int brojKnjige;
 	String imeKnjige;
 	boolean statusKnjige;
